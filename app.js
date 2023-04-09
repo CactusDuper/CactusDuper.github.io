@@ -18,6 +18,11 @@ function filterSportsGames(gamesList) {
 }
 
 async function selectGames() {
+    const nsfwWarning = "This random game selector may display some NSFW games. By clicking OK, you confirm that you are 18+ and understand that filtering the games is annoying, and there may be some games left in the list still.";
+    if (!confirm(nsfwWarning)) {
+        return;
+    }
+    
     const numGames = parseInt(document.getElementById("num-games").value);
     let gamesList = await loadGames();
     
