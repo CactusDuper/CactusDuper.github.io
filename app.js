@@ -40,6 +40,15 @@ function getCookie(name) {
     return "";
 }
 
+function createGameLink(game) {
+    const anchor = document.createElement("a");
+    anchor.href = `https://www.google.com/search?q=${encodeURIComponent(game)}`;
+    anchor.target = "_blank";
+    anchor.rel = "noopener noreferrer";
+    anchor.textContent = game;
+    return anchor;
+}
+
 async function selectGames() {
     const nsfwWarning = "This random game selector may display some NSFW games. By clicking OK, you confirm that you are 18+ and understand that filtering the games is annoying, and there may be some games left in the list still.";
     
@@ -67,7 +76,11 @@ async function selectGames() {
     randomGames.forEach(game => {
         const listItem = document.createElement("div");
         listItem.classList.add("game-item");
-        listItem.textContent = game;
+        
+        // Create a link for the game and add it to the list item
+        const gameLink = createGameLink(game);
+        listItem.appendChild(gameLink);
+        
         gameListElement.appendChild(listItem);
     });
 }
